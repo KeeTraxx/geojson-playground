@@ -11,3 +11,11 @@ aside {
   flex: 0 0 15em;
   background-color: #eee;
 }
+
+.layer-lakes {
+  fill: darkblue;
+}
+
+.layer-canton-labels text {
+  text-anchor: middle;
+}
