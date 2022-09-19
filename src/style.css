@@ -18,6 +18,7 @@ aside {
 
 .layer-canton-labels text {
   text-anchor: middle;
+  pointer-events: none;
 }
 
 .layer-path {

@@ -35,6 +35,9 @@ d3.select('g.layer-lakes')
 
 // Exercise 1a: click / hover on lake will display its name to the <aside> element
 // hint: use .on('click', (event, feature) => d3.select('aside').text('hello world'))
+d3.select('g.layer-lakes')
+.selectAll('path')
+.on('mouseenter', (ev, feature) => d3.select('aside').text(feature.properties.name));
 
 // Exercise 2: draw the following GeoJSON Feature using pathDrawer
 const truesselStrasse2 = {
