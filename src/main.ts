@@ -8,7 +8,8 @@ import { ExtendedFeature, ExtendedFeatureCollection } from 'd3';
 const projection = d3.geoMercator();
 
 // geoPath can generate <path d="xxx"> commands
-const pathDrawer = d3.geoPath(projection);
+const pathDrawer = d3.geoPath(projection)
+  .pointRadius(3); // circle size for "Point" geometries
 
 // fit the FeatureCollection inside a rectangle of 640x480
 projection.fitSize([640, 480], allCantons as ExtendedFeatureCollection);
@@ -18,12 +19,17 @@ d3.select('g.layer-cantons') // select group element
   .selectAll('path') // select all path elements
   .data(allCantons.features) // set data on all path elements
   .join('path') // append a <path> element per element of the array
-  .attr('d', d => pathDrawer(d as ExtendedFeature)) // set the 'd' attribute of the path element using
+  .attr('d', feature => pathDrawer(feature as ExtendedFeature)) // set the 'd' attribute of the path element using
   .attr('fill', (_, i) => d3.schemeCategory10[i % d3.schemeCategory10.length]); // fill with a color
 
+// Exercise 1: draw all lakes from ../data/ch-lakes.json
+// hint: make a new layer in index.html
 
-/*
-const person = {
+// Exercise 1a: click / hover on lake will display its name to the <aside> element
+// hint: use .on('click', (event, feature) => d3.select('aside').text('hello world'))
+
+// Exercise 2: draw the following GeoJSON Feature using pathDrawer
+const truesselStrasse2 = {
   "type": "Feature",
   "id": "1",
   "geometry": {
@@ -36,10 +42,8 @@ const person = {
   }
 }
 
-d3.select('g.layer-persons') // select group element
-  .selectAll('path') // select all path elements
-  .data([person]) // set data on all path elements
-  .join('path') // append a <path> element per element of the array
-  .attr('d', d => pathDrawer(d as ExtendedFeature)); // set the 'd' attribute of the path element using
+// Exercise 2a: draw a symbol instead using d3.symbol()
+const triangleSymbolDrawer = d3.symbol().type(d3.symbolTriangle).size(5);
 
-  */
+// Exercise 3: add labels to cantons
+// hint: use path pathDrawer.centroid() to find the center of a GeoJSON Feature
