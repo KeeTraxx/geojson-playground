@@ -47,3 +47,7 @@ const triangleSymbolDrawer = d3.symbol().type(d3.symbolTriangle).size(5);
 
 // Exercise 3: add labels to cantons
 // hint: use path pathDrawer.centroid() to find the center of a GeoJSON Feature
+
+// Exercise 4: draw the path in ../data/path-from-bern-to-thun.json
+
+// Exercise 4a: find out the point at 15km of the hike and draw that point
