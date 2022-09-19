@@ -19,3 +19,9 @@ aside {
 .layer-canton-labels text {
   text-anchor: middle;
 }
+
+.layer-path {
+  stroke: red;
+  stroke-width: 3px;
+  fill: none;
+}

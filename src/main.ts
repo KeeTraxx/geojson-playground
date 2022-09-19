@@ -3,7 +3,9 @@ import './style.css'
 import * as d3 from 'd3';
 import allCantons from '../data/ch-cantons.json';
 import allLakes from '../data/ch-lakes.json';
+import hikingPath from '../data/path-from-bern-to-thun.json';
 import { ExtendedFeature, ExtendedFeatureCollection } from 'd3';
+import { along, Feature, LineString } from "@turf/turf";
 
 // geoMercator converts from WGS85 to 2d screen coordinates
 const projection = d3.geoMercator();
@@ -75,5 +77,16 @@ d3.select('g.layer-canton-labels')
 .text(feature => feature.properties.name);
 
 // Exercise 4: draw the path in ../data/path-from-bern-to-thun.json
+d3.select('g.layer-path')
+.selectAll('path')
+.data([hikingPath])
+.join('path')
+.attr('d', feature => pathDrawer(feature as ExtendedFeature));
 
 // Exercise 4a: find out the point at 15km of the hike and draw that point
+const km15 = along(hikingPath as Feature<LineString, any>, 15, {units: 'kilometers'});
+d3.select('g.layer-point-on-path')
+.selectAll('path')
+.data([km15])
+.join('path')
+.attr('d', feature => pathDrawer(feature as ExtendedFeature));
